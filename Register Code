@@ -1,0 +1,38 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Threading;
+
+namespace LoginAndRegTest
+{
+    [TestClass]
+    public class UnitTest1
+    {
+        [TestMethod]
+        public void TestMethod1()
+        {
+            IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://login.mailchimp.com/");
+            driver.Manage().Window.Maximize();
+            driver.FindElement(By.LinkText("Create an account")).Click();
+
+            //email & username
+            driver.FindElement(By.Name("email")).SendKeys("dulguun.g9@gmail.com");
+
+            //Password
+            driver.FindElement(By.Id("new_password")).SendKeys("Dulguun@4321");
+
+            //Checkbox
+            driver.FindElement(By.Name("marketing_newsletter")).Click();
+
+            //Signup button
+            driver.FindElement(By.Id("create-account-enabled")).Click();
+
+
+            Thread.Sleep(4000);
+            driver.Quit();
+        }
+    }
+}
+
